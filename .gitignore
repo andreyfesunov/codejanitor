@@ -375,3 +375,6 @@ ASALocalRun/
 CLAUDE.md
 thoughts/
 hack/
+
+# environment variables
+.env
