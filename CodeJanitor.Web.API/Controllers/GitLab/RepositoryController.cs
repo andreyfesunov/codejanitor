@@ -1,0 +1,20 @@
+﻿using CodeJanitor.Web.API.Mappers;
+using CodeJanitor.Web.API.Requests;
+using CodeJanitor.Web.API.Responses;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
+
+namespace CodeJanitor.Web.API.Controllers.GitLab;
+
+[ApiController]
+[Route("api/gitlab/repositories")]
+public class RepositoryController(ISender mediator) : ControllerBase
+{
+    [HttpPost]
+    public async Task<RegisterRepositoryResponseModel> Register([FromBody] RegisterRepositoryRequestModel requestModel)
+    {
+        var command = RepositoryMapper.Map(requestModel);
+        var result = await mediator.Send(command);
+        return RepositoryMapper.Map(result);
+    }
+}

@@ -9,11 +9,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeJanitor.Platform.Domain
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeJanitor.Platform.GitLab.Infrastructure", "CodeJanitor.Platform.GitLab.Infrastructure\CodeJanitor.Platform.GitLab.Infrastructure.csproj", "{A5B9ABD5-98F7-4C13-B8A8-010AC9C6B9AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeJanitor.CodeFixer.Domain", "CodeJanitor.CodeFixer.Domain\CodeJanitor.CodeFixer.Domain.csproj", "{7B58534E-A441-49FA-978C-3F64914C0E99}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeJanitor.CodeFixer.Claude.Infrastructure", "CodeJanitor.CodeFixer.Claude.Infrastructure\CodeJanitor.CodeFixer.Claude.Infrastructure.csproj", "{9BE08D39-6B7C-4292-B459-C67FD608070E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeJanitor.Docker.Infrastructure", "CodeJanitor.Docker.Infrastructure\CodeJanitor.Docker.Infrastructure.csproj", "{2FF7E5E8-123D-430D-8C84-BAA5E74C7387}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeJanitor.Web.API", "CodeJanitor.Web.API\CodeJanitor.Web.API.csproj", "{019D90D5-7CC1-40E4-A8E7-EBACFD230238}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5DF40445-F1E1-405D-B4F0-82DF3F68F21B}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeJanitor.Platform.Application", "CodeJanitor.Platform.Application\CodeJanitor.Platform.Application.csproj", "{0629EF1B-0840-443F-8EE5-390510A43634}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeJanitor.DependencyRules.Tests", "CodeJanitor.DependencyRules.Tests\CodeJanitor.DependencyRules.Tests.csproj", "{B0BED8CC-C69E-43DA-94AC-D1AA803FC57A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,17 +43,21 @@ Global
 		{A5B9ABD5-98F7-4C13-B8A8-010AC9C6B9AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5B9ABD5-98F7-4C13-B8A8-010AC9C6B9AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5B9ABD5-98F7-4C13-B8A8-010AC9C6B9AA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7B58534E-A441-49FA-978C-3F64914C0E99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7B58534E-A441-49FA-978C-3F64914C0E99}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7B58534E-A441-49FA-978C-3F64914C0E99}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7B58534E-A441-49FA-978C-3F64914C0E99}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9BE08D39-6B7C-4292-B459-C67FD608070E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9BE08D39-6B7C-4292-B459-C67FD608070E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9BE08D39-6B7C-4292-B459-C67FD608070E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9BE08D39-6B7C-4292-B459-C67FD608070E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2FF7E5E8-123D-430D-8C84-BAA5E74C7387}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2FF7E5E8-123D-430D-8C84-BAA5E74C7387}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2FF7E5E8-123D-430D-8C84-BAA5E74C7387}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2FF7E5E8-123D-430D-8C84-BAA5E74C7387}.Release|Any CPU.Build.0 = Release|Any CPU
+		{019D90D5-7CC1-40E4-A8E7-EBACFD230238}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{019D90D5-7CC1-40E4-A8E7-EBACFD230238}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{019D90D5-7CC1-40E4-A8E7-EBACFD230238}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{019D90D5-7CC1-40E4-A8E7-EBACFD230238}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0629EF1B-0840-443F-8EE5-390510A43634}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0629EF1B-0840-443F-8EE5-390510A43634}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0629EF1B-0840-443F-8EE5-390510A43634}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0629EF1B-0840-443F-8EE5-390510A43634}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0BED8CC-C69E-43DA-94AC-D1AA803FC57A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0BED8CC-C69E-43DA-94AC-D1AA803FC57A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0BED8CC-C69E-43DA-94AC-D1AA803FC57A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0BED8CC-C69E-43DA-94AC-D1AA803FC57A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
