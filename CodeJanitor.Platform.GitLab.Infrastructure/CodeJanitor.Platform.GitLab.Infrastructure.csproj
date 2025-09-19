@@ -8,13 +8,13 @@
 
     <ItemGroup>
         <ProjectReference Include="..\CodeJanitor.Platform.Domain\CodeJanitor.Platform.Domain.csproj"/>
+        <ProjectReference Include="..\CodeJanitor.Shared.Infrastructure\CodeJanitor.Shared.Infrastructure.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="Dapper" Version="2.1.66"/>
         <PackageReference Include="GitLabApiClient" Version="1.8.0"/>
         <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.0"/>
-        <PackageReference Include="Npgsql" Version="9.0.3"/>
     </ItemGroup>
 
 </Project>
