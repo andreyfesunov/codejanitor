@@ -1,4 +1,4 @@
-﻿using CodeJanitor.Platform.Application.Commands.GitLab;
+﻿using CodeJanitor.Platform.Application.Commands;
 using CodeJanitor.Platform.Application.Responses;
 using CodeJanitor.Web.API.Requests;
 using CodeJanitor.Web.API.Responses;

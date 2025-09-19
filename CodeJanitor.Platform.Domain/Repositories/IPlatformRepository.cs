@@ -8,5 +8,6 @@ public interface IPlatformRepository
     public Task<Repository?> GetByUrl(RepositoryUrl url);
     public Task<Repository> Create(Repository repository);
     public Task<Repository> Update(Repository repository);
+    public Task Validate(Repository repository);
     public Task<Workflow> GetWorkflow(Repository repository);
 }

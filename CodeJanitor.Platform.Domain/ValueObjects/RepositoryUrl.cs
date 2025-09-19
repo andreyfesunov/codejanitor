@@ -10,12 +10,12 @@ public sealed record RepositoryUrl
     {
         Value = value;
     }
-    
+
     public static RepositoryUrl Create(string url)
     {
         if (!Uri.TryCreate(url, UriKind.Absolute, out var uri))
-            throw new InvalidRepositoryUrlException(url);
-        
+            throw new InvalidUrlException(url);
+
         return new RepositoryUrl(uri);
     }
 }

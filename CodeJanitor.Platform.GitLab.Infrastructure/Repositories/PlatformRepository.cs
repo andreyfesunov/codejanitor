@@ -2,9 +2,10 @@
 using CodeJanitor.Platform.Domain.Repositories;
 using CodeJanitor.Platform.Domain.ValueObjects;
 using CodeJanitor.Platform.GitLab.Infrastructure.Context;
+using CodeJanitor.Platform.GitLab.Infrastructure.Utilities;
 using Dapper;
 
-namespace CodeJanitor.Platform.GitLab.Infrastructure.Repositories.GitLab;
+namespace CodeJanitor.Platform.GitLab.Infrastructure.Repositories;
 
 public sealed class PlatformRepository(DatabaseContext context) : IPlatformRepository
 {
@@ -45,6 +46,13 @@ public sealed class PlatformRepository(DatabaseContext context) : IPlatformRepos
 
             return repository;
         });
+    }
+
+    public async Task Validate(Repository repository)
+    {
+        var validator = new TokenValidator(repository.Url.Value.ToString(), repository.Token.Value);
+
+        await validator.ValidateTokenAndPermissionsAsync();
     }
 
     public Task<Workflow> GetWorkflow(Repository repository)
