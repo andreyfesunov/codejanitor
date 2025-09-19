@@ -22,6 +22,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeJanitor.Platform.Applic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeJanitor.DependencyRules.Tests", "CodeJanitor.DependencyRules.Tests\CodeJanitor.DependencyRules.Tests.csproj", "{B0BED8CC-C69E-43DA-94AC-D1AA803FC57A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeJanitor.Shared.Infrastructure", "CodeJanitor.Shared.Infrastructure\CodeJanitor.Shared.Infrastructure.csproj", "{6D1C5349-934E-4037-8C79-E6BD5E48373F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeJanitor.Initializer", "CodeJanitor.Initializer\CodeJanitor.Initializer.csproj", "{8F8438DC-8E64-4216-B4BD-D486267DCDE3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,5 +63,13 @@ Global
 		{B0BED8CC-C69E-43DA-94AC-D1AA803FC57A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0BED8CC-C69E-43DA-94AC-D1AA803FC57A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0BED8CC-C69E-43DA-94AC-D1AA803FC57A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D1C5349-934E-4037-8C79-E6BD5E48373F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D1C5349-934E-4037-8C79-E6BD5E48373F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D1C5349-934E-4037-8C79-E6BD5E48373F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D1C5349-934E-4037-8C79-E6BD5E48373F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F8438DC-8E64-4216-B4BD-D486267DCDE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F8438DC-8E64-4216-B4BD-D486267DCDE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F8438DC-8E64-4216-B4BD-D486267DCDE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F8438DC-8E64-4216-B4BD-D486267DCDE3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

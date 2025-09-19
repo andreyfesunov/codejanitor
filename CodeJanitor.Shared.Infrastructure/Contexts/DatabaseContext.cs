@@ -1,7 +1,7 @@
 ﻿using System.Data;
 using Npgsql;
 
-namespace CodeJanitor.Platform.GitLab.Infrastructure.Context;
+namespace CodeJanitor.Shared.Infrastructure.Contexts;
 
 public sealed class DatabaseContext(string connectionString)
 {

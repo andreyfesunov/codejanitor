@@ -1,8 +1,8 @@
 ﻿using CodeJanitor.Platform.Domain.Models;
 using CodeJanitor.Platform.Domain.Repositories;
 using CodeJanitor.Platform.Domain.ValueObjects;
-using CodeJanitor.Platform.GitLab.Infrastructure.Context;
 using CodeJanitor.Platform.GitLab.Infrastructure.Utilities;
+using CodeJanitor.Shared.Infrastructure.Contexts;
 using Dapper;
 
 namespace CodeJanitor.Platform.GitLab.Infrastructure.Repositories;
