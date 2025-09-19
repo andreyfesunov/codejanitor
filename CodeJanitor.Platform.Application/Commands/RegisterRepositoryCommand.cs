@@ -1,7 +1,7 @@
 ﻿using CodeJanitor.Platform.Application.Responses;
 using MediatR;
 
-namespace CodeJanitor.Platform.Application.Commands.GitLab;
+namespace CodeJanitor.Platform.Application.Commands;
 
 public sealed record RegisterRepositoryCommand : IRequest<RegisterRepositoryResponse>
 {

@@ -1,4 +1,4 @@
-﻿using CodeJanitor.Platform.Application.Commands.GitLab;
+﻿using CodeJanitor.Platform.Application.Commands;
 using CodeJanitor.Platform.Application.Responses;
 using CodeJanitor.Platform.Domain.Exceptions;
 using CodeJanitor.Platform.Domain.Models;
@@ -22,6 +22,8 @@ public sealed class RegisterRepositoryCommandHandler(IPlatformRepository reposit
         cancellationToken.ThrowIfCancellationRequested();
 
         var model = new Repository(url, token);
+
+        await repository.Validate(model);
 
         var createTask = repository.Create(model);
         var workflowTask = repository.GetWorkflow(model);
