@@ -1,14 +1,14 @@
 ﻿using CodeJanitor.Platform.Application.Commands;
 using CodeJanitor.Platform.Application.Responses;
 using CodeJanitor.Platform.Domain.Exceptions;
+using CodeJanitor.Platform.Domain.Factories;
 using CodeJanitor.Platform.Domain.Models;
-using CodeJanitor.Platform.Domain.Repositories;
 using CodeJanitor.Platform.Domain.ValueObjects;
 using MediatR;
 
 namespace CodeJanitor.Platform.Application.Handlers.GitLab;
 
-public sealed class UpdateRepositoryCommandHandler(IPlatformRepository repository)
+public sealed class UpdateRepositoryCommandHandler(IPlatformRepositoryFactory factory)
     : IRequestHandler<UpdateRepositoryCommand, UpdateRepositoryResponse>
 {
     public async Task<UpdateRepositoryResponse> Handle(UpdateRepositoryCommand request,
@@ -17,6 +17,8 @@ public sealed class UpdateRepositoryCommandHandler(IPlatformRepository repositor
         var url = RepositoryUrl.Create(request.RepositoryUrl);
         var previousToken = RepositoryToken.Create(request.PreviousAccessToken, Provider.GitLab);
         var newToken = RepositoryToken.Create(request.NewAccessToken, Provider.GitLab);
+
+        var repository = factory.Create(Provider.GitLab);
 
         var oldModel = await repository.GetByUrl(url);
 
