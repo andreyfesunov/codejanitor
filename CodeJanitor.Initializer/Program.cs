@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CodeJanitor.Initializer;
 
-internal static class Program
+public static class Program
 {
     public static async Task Main(string[] args)
     {

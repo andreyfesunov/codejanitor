@@ -17,4 +17,12 @@ public class RepositoryController(ISender mediator) : ControllerBase
         var result = await mediator.Send(command);
         return RepositoryMapper.Map(result);
     }
+
+    [HttpPut]
+    public async Task<UpdateRepositoryResponseModel> Update([FromBody] UpdateRepositoryRequestModel requestModel)
+    {
+        var command = RepositoryMapper.Map(requestModel);
+        var result = await mediator.Send(command);
+        return RepositoryMapper.Map(result);
+    }
 }
