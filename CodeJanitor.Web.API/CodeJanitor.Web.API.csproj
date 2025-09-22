@@ -20,6 +20,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\CodeJanitor.Docker.Application\CodeJanitor.Docker.Application.csproj"/>
         <ProjectReference Include="..\CodeJanitor.Platform.Application\CodeJanitor.Platform.Application.csproj"/>
         <ProjectReference Include="..\CodeJanitor.Platform.GitLab.Infrastructure\CodeJanitor.Platform.GitLab.Infrastructure.csproj"/>
     </ItemGroup>

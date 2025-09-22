@@ -8,7 +8,7 @@
       - 8080:8080
       - 8081:8081
     environment:
-      ConnectionStrings__Default: ${DB_CONNECTION}
+      DatabaseContext__ConnectionString: ${DB_CONNECTION}
 
   postgres:
     image: postgres:17.6
