@@ -8,7 +8,7 @@ public static class Program
 
         builder.Services.AddOpenApi();
 
-        builder.Services.Configure();
+        builder.Services.Configure(builder.Configuration);
 
         builder.Configuration
             .AddJsonFile("appsettings.json", false, true)

@@ -26,6 +26,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeJanitor.Shared.Infrastr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeJanitor.Initializer", "CodeJanitor.Initializer\CodeJanitor.Initializer.csproj", "{8F8438DC-8E64-4216-B4BD-D486267DCDE3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeJanitor.Shared.Domain", "CodeJanitor.Shared.Domain\CodeJanitor.Shared.Domain.csproj", "{1EFE1899-71D9-4319-AFD3-6A0FEC24DC26}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeJanitor.Docker.Application", "CodeJanitor.Docker.Application\CodeJanitor.Docker.Application.csproj", "{ED1FC5A1-0117-495D-B292-B3671F490B36}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,5 +75,13 @@ Global
 		{8F8438DC-8E64-4216-B4BD-D486267DCDE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F8438DC-8E64-4216-B4BD-D486267DCDE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F8438DC-8E64-4216-B4BD-D486267DCDE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EFE1899-71D9-4319-AFD3-6A0FEC24DC26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EFE1899-71D9-4319-AFD3-6A0FEC24DC26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EFE1899-71D9-4319-AFD3-6A0FEC24DC26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EFE1899-71D9-4319-AFD3-6A0FEC24DC26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED1FC5A1-0117-495D-B292-B3671F490B36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED1FC5A1-0117-495D-B292-B3671F490B36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED1FC5A1-0117-495D-B292-B3671F490B36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED1FC5A1-0117-495D-B292-B3671F490B36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

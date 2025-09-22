@@ -7,11 +7,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="MediatR" Version="13.0.0"/>
+        <Reference Include="MediatR">
+            <HintPath>..\..\..\.nuget\packages\mediatr\13.0.0\lib\net9.0\MediatR.dll</HintPath>
+        </Reference>
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\CodeJanitor.Platform.Domain\CodeJanitor.Platform.Domain.csproj"/>
         <ProjectReference Include="..\CodeJanitor.Shared.Domain\CodeJanitor.Shared.Domain.csproj"/>
     </ItemGroup>
 
