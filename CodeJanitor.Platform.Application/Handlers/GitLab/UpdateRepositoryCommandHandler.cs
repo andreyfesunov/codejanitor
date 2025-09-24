@@ -20,18 +20,18 @@ public sealed class UpdateRepositoryCommandHandler(IPlatformRepositoryFactory fa
 
         var repository = factory.Create(Provider.GitLab);
 
-        var oldModel = await repository.GetByUrl(url);
+        var oldModel = await repository.GetByUrlAsync(url);
 
         if (oldModel == null) throw new RepositoryNotExistsException(url);
         if (oldModel.Token != previousToken) throw new RepositoryUpdateFailedException(url);
 
         var newModel = new Repository(url, newToken);
 
-        await repository.Validate(newModel);
+        await repository.ValidateAsync(newModel);
 
         return new UpdateRepositoryResponse
         {
-            Repository = await repository.Update(newModel)
+            Repository = await repository.UpdateAsync(newModel)
         };
     }
 }

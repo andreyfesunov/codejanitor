@@ -13,6 +13,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\CodeJanitor.Docker.Domain\CodeJanitor.Docker.Domain.csproj"/>
         <ProjectReference Include="..\CodeJanitor.Shared.Domain\CodeJanitor.Shared.Domain.csproj"/>
     </ItemGroup>
 
