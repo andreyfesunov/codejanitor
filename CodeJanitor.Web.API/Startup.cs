@@ -1,10 +1,13 @@
 using CodeJanitor.Docker.Application;
+using CodeJanitor.Docker.Domain.Repositories;
+using CodeJanitor.Docker.Infrastructure.Repositories;
 using CodeJanitor.Platform.Application;
 using CodeJanitor.Platform.Domain.Factories;
-using CodeJanitor.Platform.GitLab.Infrastructure.Factories;
 using CodeJanitor.Shared.Infrastructure.Contexts;
 using CodeJanitor.Web.API.Factories;
-using GitLab = CodeJanitor.Platform.GitLab.Infrastructure.Repositories;
+using GitLabRepositories = CodeJanitor.Platform.GitLab.Infrastructure.Repositories;
+using GitLabFactories = CodeJanitor.Platform.GitLab.Infrastructure.Factories;
+using DockerFactories = CodeJanitor.Docker.Infrastructure.Factories;
 
 namespace CodeJanitor.Web.API;
 
@@ -31,7 +34,23 @@ public static class Startup
         services.AddScoped<IPlatformRepositoryFactory, PlatformRepositoryFactory>();
 
         services.Configure<WebhookOptions>(configuration.GetSection("WebhookOptions"));
-        services.AddScoped<IWebhookUrlFactory, WebhookUrlFactory>();
+        services.AddScoped<GitLabFactories.IWebhookUrlFactory, WebhookUrlFactory>();
+        services.AddScoped<DockerFactories.IWebhookUrlFactory, WebhookUrlFactory>();
+
+        services.Configure<DockerOptions>(configuration.GetSection("DockerOptions"));
+        services.AddScoped<DockerFactories.IDockerFactory, DockerFactory>();
+
+        #endregion
+
+        #region Docker.Infrastructure
+
+        services.AddScoped<IDockerRepository, DockerRepository>();
+
+        #endregion
+
+        #region GitLab.Infrastructure
+
+        services.AddScoped<GitLabRepositories.PlatformRepository>();
 
         #endregion
 
@@ -39,12 +58,6 @@ public static class Startup
 
         services.Configure<DatabaseContextOptions>(configuration.GetSection("DatabaseContext"));
         services.AddScoped<DatabaseContext>();
-
-        #endregion
-
-        #region GitLab.Infrastructure
-
-        services.AddScoped<GitLab.PlatformRepository>();
 
         #endregion
     }

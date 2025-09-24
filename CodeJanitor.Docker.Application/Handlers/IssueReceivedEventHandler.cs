@@ -1,12 +1,19 @@
+using CodeJanitor.Docker.Domain.Repositories;
 using CodeJanitor.Shared.Domain.Events;
 using MediatR;
 
 namespace CodeJanitor.Docker.Application.Handlers;
 
-public sealed class IssueReceivedEventHandler : INotificationHandler<IssueReceivedEvent>
+public sealed class IssueReceivedEventHandler(IDockerRepository repository) : INotificationHandler<IssueReceivedEvent>
 {
-    public Task Handle(IssueReceivedEvent notification, CancellationToken cancellationToken)
+    public async Task Handle(IssueReceivedEvent notification, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        await repository.CreateBugFixContainerAsync(
+            notification.Id,
+            notification.RepositoryUrl,
+            notification.AccessToken,
+            notification.Title,
+            notification.Description
+        );
     }
 }

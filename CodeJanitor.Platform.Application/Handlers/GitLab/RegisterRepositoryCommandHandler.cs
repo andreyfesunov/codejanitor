@@ -19,16 +19,16 @@ public sealed class RegisterRepositoryCommandHandler(IPlatformRepositoryFactory 
 
         var repository = factory.Create(Provider.GitLab);
 
-        if (await repository.GetByUrl(url) != null) throw new RepositoryAlreadyExistsException(url);
+        if (await repository.GetByUrlAsync(url) != null) throw new RepositoryAlreadyExistsException(url);
 
         cancellationToken.ThrowIfCancellationRequested();
 
         var model = new Repository(url, token);
 
-        await repository.Validate(model);
+        await repository.ValidateAsync(model);
 
-        var createTask = repository.Create(model);
-        var workflowTask = repository.GetWorkflow(model);
+        var createTask = repository.CreateAsync(model);
+        var workflowTask = repository.GetWorkflowAsync(model);
 
         await Task.WhenAll(createTask, workflowTask);
 

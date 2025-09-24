@@ -13,7 +13,7 @@ public sealed class PlatformRepository(
     IWebhookUrlFactory webhookUrlFactory
 ) : IPlatformRepository
 {
-    public async Task<Repository?> GetByUrl(RepositoryUrl url)
+    public async Task<Repository?> GetByUrlAsync(RepositoryUrl url)
     {
         return await context.ExecuteAsync(async connection =>
         {
@@ -26,7 +26,20 @@ public sealed class PlatformRepository(
         });
     }
 
-    public async Task<Repository> Create(Repository repository)
+    public async Task<Repository> RequireByIdAsync(Guid id)
+    {
+        return await context.ExecuteAsync(async connection =>
+        {
+            var result = await connection.QueryAsync<Repository>(
+                "SELECT * FROM repositories WHERE id = @Id",
+                new { Id = id }
+            );
+
+            return result.First();
+        });
+    }
+
+    public async Task<Repository> CreateAsync(Repository repository)
     {
         return await context.ExecuteAsync(async connection =>
         {
@@ -39,7 +52,7 @@ public sealed class PlatformRepository(
         });
     }
 
-    public async Task<Repository> Update(Repository repository)
+    public async Task<Repository> UpdateAsync(Repository repository)
     {
         return await context.ExecuteAsync(async connection =>
         {
@@ -52,14 +65,14 @@ public sealed class PlatformRepository(
         });
     }
 
-    public async Task Validate(Repository repository)
+    public async Task ValidateAsync(Repository repository)
     {
         var validator = new TokenValidator(repository.Url.Value.ToString(), repository.Token.Value);
 
         await validator.ValidateTokenAndPermissionsAsync();
     }
 
-    public async Task<Workflow> GetWorkflow(Repository repository)
+    public async Task<Workflow> GetWorkflowAsync(Repository repository)
     {
         var workflow = new Workflow(
             GetWorkflowContent(),
@@ -117,7 +130,7 @@ public sealed class PlatformRepository(
         Guid repositoryId)
     {
         return new Dictionary<string, string>([
-            new KeyValuePair<string, string>("CI_CODEJANITOR_WEBHOOK_URL", await factory.Create(repositoryId))
+            new KeyValuePair<string, string>("CI_CODEJANITOR_WEBHOOK_URL", await factory.CreateGitLabUrl(repositoryId))
         ]);
     }
 }
