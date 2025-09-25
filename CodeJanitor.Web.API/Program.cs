@@ -6,17 +6,23 @@ public static class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        builder.Services.AddOpenApi();
-
-        builder.Services.Configure(builder.Configuration);
-
         builder.Configuration
             .AddJsonFile("appsettings.json", false, true)
             .AddEnvironmentVariables();
 
+        builder.Services.AddSwaggerGen();
+
+        builder.Services.Configure(builder.Configuration);
+
         var app = builder.Build();
 
-        if (app.Environment.IsDevelopment()) app.MapOpenApi();
+        if (builder.Environment.IsDevelopment())
+        {
+            app.UseSwagger();
+            app.UseSwaggerUI();
+        }
+
+        app.MapControllers();
 
         app.UseHttpsRedirection();
 

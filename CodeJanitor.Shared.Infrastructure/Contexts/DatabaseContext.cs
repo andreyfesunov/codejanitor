@@ -1,25 +1,21 @@
 ﻿using System.Data;
+using CodeJanitor.Shared.Infrastructure.Factories;
 using Npgsql;
 
 namespace CodeJanitor.Shared.Infrastructure.Contexts;
 
-public sealed record DatabaseContextOptions
-{
-    public required string ConnectionString { get; init; }
-}
-
-public sealed class DatabaseContext(DatabaseContextOptions options)
+public sealed class DatabaseContext(IDatabaseContextFactory factory)
 {
     public async Task<T> ExecuteAsync<T>(Func<IDbConnection, Task<T>> operation)
     {
-        await using var connection = new NpgsqlConnection(options.ConnectionString);
+        await using var connection = new NpgsqlConnection(await factory.GetConnectionString());
         await connection.OpenAsync();
         return await operation(connection);
     }
 
     public async Task<T> TransactAsync<T>(Func<IDbConnection, IDbTransaction, Task<T>> operation)
     {
-        await using var connection = new NpgsqlConnection(options.ConnectionString);
+        await using var connection = new NpgsqlConnection(await factory.GetConnectionString());
         await connection.OpenAsync();
         await using var transaction = await connection.BeginTransactionAsync();
 

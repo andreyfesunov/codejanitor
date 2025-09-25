@@ -1,6 +1,7 @@
 ﻿using CodeJanitor.Platform.Domain.Exceptions;
 using GitLabApiClient;
 using GitLabApiClient.Models;
+using GitLabApiClient.Models.Projects.Responses;
 
 namespace CodeJanitor.Platform.GitLab.Infrastructure.Utilities;
 
@@ -15,8 +16,11 @@ public class TokenValidator(string url, string token)
             var uri = new Uri(url);
             var path = uri.AbsolutePath.TrimStart('/').TrimEnd('/');
 
-            var project = await _client.Projects.GetAsync(path);
-            var permissions = project.Permissions.ProjectAccess;
+            // TODO add bulk?
+            var projects = await _client.Projects.GetAsync() ?? new List<Project>();
+
+            var project = projects.First(p => p.HttpUrlToRepo.Contains(path));
+            var permissions = project.Permissions.ProjectAccess ?? project.Permissions.GroupAccess;
 
             if (permissions == null || permissions.AccessLevel < (int)AccessLevel.Reporter)
                 throw new UnauthorizedTokenException("Not enough permissions to clone repository.");

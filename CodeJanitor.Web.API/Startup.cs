@@ -4,6 +4,7 @@ using CodeJanitor.Docker.Infrastructure.Repositories;
 using CodeJanitor.Platform.Application;
 using CodeJanitor.Platform.Domain.Factories;
 using CodeJanitor.Shared.Infrastructure.Contexts;
+using CodeJanitor.Shared.Infrastructure.Factories;
 using CodeJanitor.Web.API.Factories;
 using GitLabRepositories = CodeJanitor.Platform.GitLab.Infrastructure.Repositories;
 using GitLabFactories = CodeJanitor.Platform.GitLab.Infrastructure.Factories;
@@ -18,6 +19,12 @@ public static class Startup
         #region Controllers (API)
 
         services.AddControllers();
+
+        #endregion
+
+        #region HTTP Context Accessor
+
+        services.AddHttpContextAccessor();
 
         #endregion
 
@@ -40,6 +47,9 @@ public static class Startup
         services.Configure<DockerOptions>(configuration.GetSection("DockerOptions"));
         services.AddScoped<DockerFactories.IDockerFactory, DockerFactory>();
 
+        services.Configure<DatabaseContextOptions>(configuration.GetSection("DatabaseContext"));
+        services.AddScoped<IDatabaseContextFactory, DatabaseContextFactory>();
+
         #endregion
 
         #region Docker.Infrastructure
@@ -56,7 +66,6 @@ public static class Startup
 
         #region Shared.Infrastructure
 
-        services.Configure<DatabaseContextOptions>(configuration.GetSection("DatabaseContext"));
         services.AddScoped<DatabaseContext>();
 
         #endregion

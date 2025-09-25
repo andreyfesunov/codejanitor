@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace CodeJanitor.Web.API.Controllers.GitLab;
 
 [ApiController]
-[Route("api/v1/gitlab/[controller]")]
+[Route("api/v1/gitlab/repositories")]
 public class RepositoryController(ISender mediator) : ControllerBase
 {
     [HttpPost]

@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Options;
 using GitLabFactories = CodeJanitor.Platform.GitLab.Infrastructure.Factories;
 using DockerFactories = CodeJanitor.Docker.Infrastructure.Factories;
 
@@ -10,7 +11,7 @@ public sealed class WebhookOptions
 }
 
 public sealed class WebhookUrlFactory(
-    WebhookOptions options,
+    IOptions<WebhookOptions> options,
     IHttpContextAccessor accessor
 ) : GitLabFactories.IWebhookUrlFactory, DockerFactories.IWebhookUrlFactory
 {
@@ -18,7 +19,7 @@ public sealed class WebhookUrlFactory(
     {
         var host = accessor.HttpContext?.Request.Host.ToString() ?? "localhost";
         var scheme = accessor.HttpContext?.Request.Scheme ?? "http";
-        var url = $"{scheme}://{host}{options.GitLabEndpoint}?repositoryId={repositoryId.ToString()}";
+        var url = $"{scheme}://{host}{options.Value.GitLabEndpoint}?repositoryId={repositoryId.ToString()}";
 
         return Task.FromResult(url);
     }
@@ -27,7 +28,7 @@ public sealed class WebhookUrlFactory(
     {
         var host = accessor.HttpContext?.Request.Host.ToString() ?? "localhost";
         var scheme = accessor.HttpContext?.Request.Scheme ?? "http";
-        var url = $"{scheme}://{host}{options.GitLabEndpoint}";
+        var url = $"{scheme}://{host}{options.Value.GitLabEndpoint}";
 
         return Task.FromResult(url);
     }

@@ -5,6 +5,8 @@ using CodeJanitor.Platform.GitLab.Infrastructure.Factories;
 using CodeJanitor.Platform.GitLab.Infrastructure.Utilities;
 using CodeJanitor.Shared.Infrastructure.Contexts;
 using Dapper;
+using DomainRepository = CodeJanitor.Platform.Domain.Models.Repository;
+using Repository = CodeJanitor.Platform.GitLab.Infrastructure.Models.Repository;
 
 namespace CodeJanitor.Platform.GitLab.Infrastructure.Repositories;
 
@@ -13,20 +15,20 @@ public sealed class PlatformRepository(
     IWebhookUrlFactory webhookUrlFactory
 ) : IPlatformRepository
 {
-    public async Task<Repository?> GetByUrlAsync(RepositoryUrl url)
+    public async Task<DomainRepository?> GetByUrlAsync(RepositoryUrl url)
     {
         return await context.ExecuteAsync(async connection =>
         {
             var result = await connection.QueryAsync<Repository>(
                 "SELECT * FROM repositories WHERE url = @Url",
-                new { Url = url.Value }
+                new { Url = url.Value.ToString() }
             );
 
             return result.FirstOrDefault();
         });
     }
 
-    public async Task<Repository> RequireByIdAsync(Guid id)
+    public async Task<DomainRepository> RequireByIdAsync(Guid id)
     {
         return await context.ExecuteAsync(async connection =>
         {
@@ -39,40 +41,40 @@ public sealed class PlatformRepository(
         });
     }
 
-    public async Task<Repository> CreateAsync(Repository repository)
+    public async Task<DomainRepository> CreateAsync(DomainRepository repository)
     {
         return await context.ExecuteAsync(async connection =>
         {
             await connection.ExecuteAsync(
                 "INSERT INTO repositories (id, url, token) VALUES (@Id, @Url, @Token)",
-                new { repository.Id, Url = repository.Url.Value, Token = repository.Token.Value }
+                new { repository.Id, Url = repository.Url.Value.ToString(), Token = repository.Token.Value }
             );
 
             return repository;
         });
     }
 
-    public async Task<Repository> UpdateAsync(Repository repository)
+    public async Task<DomainRepository> UpdateAsync(DomainRepository repository)
     {
         return await context.ExecuteAsync(async connection =>
         {
             await connection.ExecuteAsync(
                 "UPDATE repositories SET url = @Url, token = @Token WHERE id = @Id",
-                new { repository.Id, Url = repository.Url.Value, Token = repository.Token.Value }
+                new { repository.Id, Url = repository.Url.Value.ToString(), Token = repository.Token.Value }
             );
 
             return repository;
         });
     }
 
-    public async Task ValidateAsync(Repository repository)
+    public async Task ValidateAsync(DomainRepository repository)
     {
         var validator = new TokenValidator(repository.Url.Value.ToString(), repository.Token.Value);
 
         await validator.ValidateTokenAndPermissionsAsync();
     }
 
-    public async Task<Workflow> GetWorkflowAsync(Repository repository)
+    public async Task<Workflow> GetWorkflowAsync(DomainRepository repository)
     {
         var workflow = new Workflow(
             GetWorkflowContent(),

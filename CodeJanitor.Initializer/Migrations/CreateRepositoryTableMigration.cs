@@ -11,7 +11,7 @@ public sealed class CreateRepositoryTableMigration : Migration
             .Table("repositories")
             .WithColumn("id").AsGuid().PrimaryKey()
             .WithColumn("url").AsString()
-            .WithColumn("access_token").AsString();
+            .WithColumn("token").AsString();
     }
 
     public override void Down()
