@@ -45,6 +45,7 @@ public sealed class DockerRepository(
             },
             HostConfig = new HostConfig
             {
+                NetworkMode = "host",
                 AutoRemove = false // can toggle this option to remove container after it finishes entrypoint script
             }
         });
@@ -56,6 +57,7 @@ public sealed class DockerRepository(
     {
         using var client = new DockerClientConfiguration().CreateClient();
 
+        await client.Containers.StopContainerAsync(containerId, new ContainerStopParameters());
         await client.Containers.RemoveContainerAsync(containerId, new ContainerRemoveParameters());
     }
 
@@ -64,6 +66,8 @@ public sealed class DockerRepository(
         string image
     )
     {
+        // TODO improve building Dockerfile - i don't like using relative path to get Dockerfile and build
+
         var projectPath = await dockerFactory.CreateRunnerReference();
 
         var tarStream = new MemoryStream();

@@ -28,7 +28,7 @@ public sealed class WebhookUrlFactory(
     {
         var host = accessor.HttpContext?.Request.Host.ToString() ?? "localhost";
         var scheme = accessor.HttpContext?.Request.Scheme ?? "http";
-        var url = $"{scheme}://{host}{options.Value.GitLabEndpoint}";
+        var url = $"{scheme}://{host}{options.Value.DockerEndpoint}";
 
         return Task.FromResult(url);
     }

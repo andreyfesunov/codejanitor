@@ -16,7 +16,8 @@ public static class Program
         var webhookUrl = Environment.GetEnvironmentVariable("WEBHOOK_URL") ??
                          throw new ArgumentException("WEBHOOK_URL is required");
 
-        var cloneUrl = repoUrl.Replace("https://", $"https://{accessToken}@");
+        // TODO add adapter for different providers like github, gitlab, etc.
+        var cloneUrl = repoUrl.Replace("https://", $"https://oauth2:{accessToken}@") + ".git";
         Console.WriteLine($"Cloning repository from {cloneUrl}...");
 
         var gitProcess = new Process
@@ -51,7 +52,7 @@ public static class Program
         var containerId = GetContainerId();
         Console.WriteLine($"Container ID: {containerId}");
 
-        var payload = new { ContainerId = containerId };
+        var payload = new { containerId };
         var jsonPayload = JsonSerializer.Serialize(payload);
 
         using var client = new HttpClient();
@@ -63,13 +64,13 @@ public static class Program
             : $"Error sending payload: {response.StatusCode}");
     }
 
-    private static string GetContainerId()
+    private static string? GetContainerId()
     {
-        if (!File.Exists("/proc/self/cgroup")) return "Not running in a Docker container";
+        if (!File.Exists("/proc/self/mountinfo")) return null;
 
-        var cgroupContent = File.ReadAllText("/proc/self/cgroup");
-        var match = Regex.Match(cgroupContent, "[0-9a-f]{64}", RegexOptions.Multiline);
+        var mountinfo = File.ReadAllText("/proc/self/mountinfo");
+        var match = Regex.Match(mountinfo, "/docker/containers/([0-9a-f]{64})/");
 
-        return match.Success ? match.Value : "Unable to determine container ID";
+        return match.Success ? match.Groups[1].Value : null;
     }
 }
