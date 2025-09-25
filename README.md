@@ -7,3 +7,4 @@ CodeJanitor is an auto-code fixer with Claude Code that integrates with your CI 
 - [ ] Saving to some intermediate repository coming through webhook issues - for reprocessing in case of errors.
 - [ ] Add authentication.
 - [ ] Add e2e tests.
+- [ ] MediatR is not free -> switch to Mediator.

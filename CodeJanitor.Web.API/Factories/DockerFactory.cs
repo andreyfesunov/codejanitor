@@ -17,11 +17,11 @@ public sealed class DockerFactory(IOptions<DockerOptions> options) : IDockerFact
 
     public Task<string> CreateContainerReference(Guid repositoryId)
     {
-        return Task.FromResult($"codejanitor-{repositoryId.ToString()}");
+        return Task.FromResult($"codejanitor-{repositoryId.ToString()}-{Random.Shared.Next()}");
     }
 
     public Task<string> CreateRunnerReference()
     {
-        return Task.FromResult("../../CodeJanitor.Docker.Infrastructure.Runner");
+        return Task.FromResult("../CodeJanitor.Docker.Infrastructure.Runner");
     }
 }
