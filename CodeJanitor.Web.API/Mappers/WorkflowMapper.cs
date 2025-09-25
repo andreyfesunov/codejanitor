@@ -7,6 +7,11 @@ public static class WorkflowMapper
 {
     public static WorkflowModel Map(Workflow workflow)
     {
-        return new WorkflowModel();
+        return new WorkflowModel
+        {
+            Content = workflow.Content,
+            Instructions = workflow.Instructions,
+            Secrets = workflow.Secrets
+        };
     }
 }

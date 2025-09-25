@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace CodeJanitor.Web.API.Controllers.GitLab;
 
 [ApiController]
-[Route("api/v1/[controller]")]
+[Route("api/v1/webhook")]
 public sealed class WebhookController(IMediator mediator) : ControllerBase
 {
     [HttpPost("gitlab")]

@@ -6,7 +6,7 @@ namespace CodeJanitor.Platform.Domain.ValueObjects;
 
 public sealed record RepositoryToken
 {
-    private const string GitLabFormat = "^glpat-[a-zA-Z0-9-]{19}$";
+    private const string GitLabFormat = "^glpat-[a-zA-Z0-9-]{20}$";
 
     public readonly string Value;
 
@@ -24,6 +24,11 @@ public sealed record RepositoryToken
         };
     }
 
+    public static RepositoryToken Create(string raw)
+    {
+        return Create(raw, GetProvider(raw));
+    }
+
     private static RepositoryToken CreateGitLab(string raw)
     {
         if (!Regex.IsMatch(raw, GitLabFormat))
@@ -34,9 +39,14 @@ public sealed record RepositoryToken
 
     public Provider GetProvider()
     {
-        return Value switch
+        return GetProvider(Value);
+    }
+
+    private static Provider GetProvider(string raw)
+    {
+        return raw switch
         {
-            not null when Regex.IsMatch(Value, GitLabFormat) => Provider.GitLab,
+            not null when Regex.IsMatch(raw, GitLabFormat) => Provider.GitLab,
             _ => throw new ArgumentOutOfRangeException()
         };
     }
